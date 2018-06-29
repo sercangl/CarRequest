@@ -25,20 +25,27 @@ namespace CarRequest
             SqlConnection conn = new SqlConnection();
             conn.ConnectionString = "Server=EPDI-4W68LX1\\SQLEXPRESS;Initial Catalog=CarRequest;Integrated Security=SSPI;";
             SqlCommand cmd = new SqlCommand();
-            cmd.CommandText = "SELECT Marka,Model,ID FROM tblCar";
+            cmd.CommandText = "SELECT Marka,Model,ID,IsAvailable FROM tblCar";
             cmd.Connection = conn;
             cmd.CommandType = CommandType.Text;
             SqlDataReader dr;
             conn.Open();
             dr = cmd.ExecuteReader();
-            while (dr.Read())
-            {
-                _itemcar.Add(dr["ID"].ToString(), dr["Marka"].ToString());
-                comboBox14.Items.Add(dr["Marka"].ToString()+ " " +dr["Model"].ToString());
+            
 
-            }
-            conn.Close();
+           // if (IsAvailable=0)
+          //  {
+                while (dr.Read())
+                {
+                    _itemcar.Add(dr["ID"].ToString(), dr["Marka"].ToString());
+                    comboBox14.Items.Add(dr["Marka"].ToString() + " " + dr["Model"].ToString());
 
+                }
+                conn.Close();
+          //  }
+         //   else (){
+         //       return 0;
+         //   }
         }
 
         
@@ -56,6 +63,8 @@ namespace CarRequest
             SqlDataReader dr;
             conn.Open();
             dr = cmd.ExecuteReader();
+        
+         
             while (dr.Read())
             {
                 _item.Add(dr["ID"].ToString(), dr["Name"].ToString());
@@ -168,8 +177,14 @@ namespace CarRequest
 
         private void comboBox14_SelectedIndexChanged(object sender, EventArgs e)
         {
+
+
+
             foreach (var it in _itemcar)
             {
+
+
+
                 if (it.Value.Equals(comboBox14.Text.Split(' ')[0]))
                 {
                     frm_fkCar.Text = it.Key.ToString();
