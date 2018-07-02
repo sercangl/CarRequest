@@ -13,8 +13,7 @@ namespace CarRequest
 {
     public partial class frmRentAdd : Form
     {
-
-
+      
         Dictionary<string, string> _item = new Dictionary<string, string>();
         Dictionary<string, string> _itemcar = new Dictionary<string, string>();
 
@@ -25,32 +24,27 @@ namespace CarRequest
             SqlConnection conn = new SqlConnection();
             conn.ConnectionString = "Server=EPDI-4W68LX1\\SQLEXPRESS;Initial Catalog=CarRequest;Integrated Security=SSPI;";
             SqlCommand cmd = new SqlCommand();
-            cmd.CommandText = "SELECT Marka,Model,ID,IsAvailable FROM tblCar";
+            cmd.CommandText = "SELECT Marka,Model,ID,IsAvailable FROM tblCar WHERE  IsAvailable=1 ";
             cmd.Connection = conn;
             cmd.CommandType = CommandType.Text;
             SqlDataReader dr;
             conn.Open();
             dr = cmd.ExecuteReader();
-            
 
-           // if (IsAvailable=0)
-          //  {
-                while (dr.Read())
+
+
+            while (dr.Read())
+            {
+                _itemcar.Add(dr["ID"].ToString(), dr["Marka"].ToString());
+                //if (Convert.ToBoolean(_itemcar["IsAvailable"] == "0"))
                 {
-                    _itemcar.Add(dr["ID"].ToString(), dr["Marka"].ToString());
-                    comboBox14.Items.Add(dr["Marka"].ToString() + " " + dr["Model"].ToString());
+                     comboBox14.Items.Add(dr["Marka"].ToString() + " " + dr["Model"].ToString());
 
                 }
+            }
                 conn.Close();
-          //  }
-         //   else (){
-         //       return 0;
-         //   }
+         
         }
-
-        
-
-
         public void personListele()
         {
 
@@ -103,8 +97,7 @@ namespace CarRequest
             try
             {
                 DBActions.AddRent(int.Parse(frm_fkPerson.Text), Convert.ToDateTime(frmStart_time.Text), Convert.ToDateTime(frmEnd_Time.Text), int.Parse(frm_KM.Text), int.Parse(frm_fkCar.Text));
-          
-                ResetScreen();
+                 ResetScreen();
                 MessageBox.Show("TALEBİNİZ İLETİLMİŞTİR...");
             }
             catch (Exception ex)
@@ -142,6 +135,7 @@ namespace CarRequest
             
         }
 
+        //Person list
         private void comboBox1_SelectedIndexChanged_1(object sender, EventArgs e)
         {
 
@@ -175,15 +169,14 @@ namespace CarRequest
 
         }
 
+        // Car list
         private void comboBox14_SelectedIndexChanged(object sender, EventArgs e)
         {
 
-
+          
 
             foreach (var it in _itemcar)
             {
-
-
 
                 if (it.Value.Equals(comboBox14.Text.Split(' ')[0]))
                 {

@@ -131,14 +131,16 @@
             // miRecordIncoming
             // 
             this.miRecordIncoming.Name = "miRecordIncoming";
-            this.miRecordIncoming.Size = new System.Drawing.Size(170, 22);
+            this.miRecordIncoming.Size = new System.Drawing.Size(180, 22);
             this.miRecordIncoming.Text = "Gelen Araç Kaydet";
+            this.miRecordIncoming.Click += new System.EventHandler(this.miRecordIncoming_Click);
             // 
             // miTalepApprove
             // 
             this.miTalepApprove.Name = "miTalepApprove";
-            this.miTalepApprove.Size = new System.Drawing.Size(170, 22);
+            this.miTalepApprove.Size = new System.Drawing.Size(180, 22);
             this.miTalepApprove.Text = "Talep Onayla";
+            this.miTalepApprove.Click += new System.EventHandler(this.miTalepApprove_Click);
             // 
             // mainForm
             // 

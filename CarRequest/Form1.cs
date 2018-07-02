@@ -20,6 +20,8 @@ namespace CarRequest
         frmRentAdd frmR;
         ListCar lstC;
         ListPerson lstP;
+        TalepOnayla tlpO;
+        GelenAraçKaydet glnA;
 
 
 
@@ -57,30 +59,12 @@ namespace CarRequest
 
         }
 
-        private void frmC_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            frmC.Dispose();
-            frmC = null;
-        }
-
-        private void frmA_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            frmA.Dispose();
-            frmA = null;
-        }
-        public void FrmP_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            frmP.Dispose();
-            frmP = null;
-        }
-
-        public void FrmR_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            frmR.Dispose();
-            frmR = null;
-        }
 
 
+       
+
+
+        // Araba Eklemeyi sağlayan method
         private void miAddCar_Click_1(object sender, EventArgs e)
         {
             if (frmC == null)
@@ -157,17 +141,7 @@ namespace CarRequest
 
         }
 
-        private void lstP_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            lstP.Dispose();
-         
-        }
-
-        private void lstC_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            lstC.Dispose();
-            
-        }
+        
 
         private void arabalarıListeleToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -190,5 +164,103 @@ namespace CarRequest
         {
 
         }
+
+
+
+        
+        //Talep onaylama formuna tıklanınca açılmasını sağlıyan method
+        private void miTalepApprove_Click(object sender, EventArgs e)
+        {
+            if (tlpO == null)
+            {
+                tlpO = new TalepOnayla();
+                tlpO.MdiParent = this;
+                tlpO.Show();
+                tlpO.FormClosed += tlpO_FormClosed;
+            }
+            else
+            {
+                return;
+            }
+        }
+
+
+        // Gelen araç kaydetme ..
+        private void miRecordIncoming_Click(object sender, EventArgs e)
+        {
+            if (glnA == null)
+            {
+                glnA = new GelenAraçKaydet();
+                glnA.MdiParent = this;
+                glnA.Show();
+                glnA.FormClosed += glnA_FormClosed;
+            }
+            else
+            {
+                return;
+            }
+
+        }
+
+
+
+
+
+
+        //Formlar açıldıktan sonra tekrar kapatılıp açılmasını sağlayan method
+        private void tlpO_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            tlpO.Dispose();
+            tlpO = null;
+        }
+
+        private void frmC_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            frmC.Dispose();
+            frmC = null;
+        }
+
+        private void frmA_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            frmA.Dispose();
+            frmA = null;
+        }
+        public void FrmP_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            frmP.Dispose();
+            frmP = null;
+        }
+
+        public void FrmR_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            frmR.Dispose();
+            frmR = null;
+        }
+
+        private void lstP_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            lstP.Dispose();
+
+        }
+
+        private void lstC_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            lstC.Dispose();
+
+        }
+        private void glnA_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            glnA.Dispose();
+            glnA = null;
+        }
+
+
+
+
+
+
+
+
+
     }
 }
