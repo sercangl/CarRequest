@@ -18,14 +18,20 @@ namespace CarRequest
         public FrmCarAdd()
         {
             InitializeComponent();
+            personelListele();
+           
 
+        }
+
+
+        public void personelListele()
+        {
             SqlConnection conn = new SqlConnection();
             conn.ConnectionString = "Server=EPDI-4W68LX1\\SQLEXPRESS;Initial Catalog=CarRequest;Integrated Security=SSPI;";
             SqlCommand cmd = new SqlCommand();
             cmd.CommandText = "SELECT Name,ID,Lastname FROM tblPerson";
             cmd.Connection = conn;
             cmd.CommandType = CommandType.Text;
-
             SqlDataReader dr;
             conn.Open();
             dr = cmd.ExecuteReader();
@@ -50,8 +56,11 @@ namespace CarRequest
 
 
 
-
         }
+
+
+
+
 
         private void label2_Click(object sender, EventArgs e)
         {
@@ -128,6 +137,9 @@ namespace CarRequest
         {
 
         }
+
+
+        // kişi listele
 
         private void comboBox3_SelectedIndexChanged(object sender, EventArgs e)
         {

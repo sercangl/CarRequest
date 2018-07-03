@@ -58,8 +58,8 @@ namespace CarRequest
 
 
         }
-
-        internal static void AddRent(int v1, DateTime dateTime1, DateTime dateTime2, int v2, int v3, int v4, int v5)
+        //, int v2, int v3, int v4, int v5
+        internal static void AddRent(int v1, DateTime dateTime1, DateTime dateTime2)
         {
             throw new NotImplementedException();
         }
@@ -124,8 +124,6 @@ namespace CarRequest
                 cmd.Parameters.AddWithValue("@rentEnd", rentEnd);
                 cmd.Parameters.AddWithValue("@plaka", plaka);
                 cmd.Parameters.AddWithValue("@lastkm", lastKm);
-
-
                 cmd.Parameters.AddWithValue("@available", available);
 
                 if (con.State != System.Data.ConnectionState.Open)
@@ -163,8 +161,10 @@ namespace CarRequest
 
 
         }
+        
 
-        public static void AddRent(int fkPerson,DateTime StartDate,DateTime EndDate,int KM,int fkCar)
+        //
+        public static void AddRentt(int fkPerson,DateTime StartDate,DateTime EndDate)
         {
             SqlConnection con = null;
             SqlCommand cmd = null;
@@ -172,13 +172,14 @@ namespace CarRequest
 
             try
             {
+                //,KM,fkCar    ,@KM,@fkCar
                 con = new SqlConnection(connectionString);
-                cmd = new SqlCommand("INSERT INTO tblRent (fkPerson,StartDate,EndDate,KM,fkCar) VALUES (@fkPerson,@StartDate,@EndDate,@KM,@fkCar)", con);
+                cmd = new SqlCommand("INSERT INTO tblRent (fkPerson,StartDate,EndDate) VALUES (@fkPerson,@StartDate,@EndDate)", con);
                 cmd.Parameters.AddWithValue("@fkPerson", fkPerson);
                 cmd.Parameters.AddWithValue("@StartDate", StartDate);
                 cmd.Parameters.AddWithValue("@EndDate", EndDate);
-                cmd.Parameters.AddWithValue("@KM", KM);
-                cmd.Parameters.AddWithValue("@fkCar", fkCar);
+              //  cmd.Parameters.AddWithValue("@KM", KM);
+              //  cmd.Parameters.AddWithValue("@fkCar", fkCar);
 
                 if (con.State != System.Data.ConnectionState.Open)
                     con.Open();

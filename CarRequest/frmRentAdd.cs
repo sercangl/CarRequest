@@ -36,15 +36,18 @@ namespace CarRequest
             while (dr.Read())
             {
                 _itemcar.Add(dr["ID"].ToString(), dr["Marka"].ToString());
-                //if (Convert.ToBoolean(_itemcar["IsAvailable"] == "0"))
-                {
-                     comboBox14.Items.Add(dr["Marka"].ToString() + " " + dr["Model"].ToString());
+                 //if (Convert.ToBoolean(_itemcar["IsAvailable"] == "0"))
+                 comboBox14.Items.Add(dr["Marka"].ToString() + " " + dr["Model"].ToString());
+                  }
 
-                }
-            }
-                conn.Close();
+            conn.Close();
          
         }
+
+
+
+
+
         public void personListele()
         {
 
@@ -57,21 +60,24 @@ namespace CarRequest
             SqlDataReader dr;
             conn.Open();
             dr = cmd.ExecuteReader();
-        
-         
+
+
             while (dr.Read())
             {
                 _item.Add(dr["ID"].ToString(), dr["Name"].ToString());
                 comboBox2.Items.Add(dr["Name"].ToString() + " " + dr["LastName"].ToString());
-                  // " " +dr["LastName"].ToString());
+                // " " +dr["LastName"].ToString());
 
             }
             conn.Close();
-        }
 
+        }
+     
+        
         public frmRentAdd()
         {
             InitializeComponent();
+
             personListele();
             arabalistele();
         }
@@ -92,12 +98,14 @@ namespace CarRequest
             frmStart_time.Text = string.Empty;
             frmEnd_Time.Text = string.Empty;
         }
+
         private void btnSave_Click(object sender, EventArgs e)
         {
             try
             {
-                DBActions.AddRent(int.Parse(frm_fkPerson.Text), Convert.ToDateTime(frmStart_time.Text), Convert.ToDateTime(frmEnd_Time.Text), int.Parse(frm_KM.Text), int.Parse(frm_fkCar.Text));
-                 ResetScreen();
+                DBActions.AddRentt(int.Parse(frm_fkPerson.Text), Convert.ToDateTime(frmStart_time.Text), Convert.ToDateTime(frmEnd_Time.Text));
+                //int.Parse(frm_KM.Text), int.Parse(frm_fkCar.Text)
+                ResetScreen();
                 MessageBox.Show("TALEBİNİZ İLETİLMİŞTİR...");
             }
             catch (Exception ex)
@@ -132,16 +140,17 @@ namespace CarRequest
 
         public void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            
+             
         }
 
+        
         //Person list
-        private void comboBox1_SelectedIndexChanged_1(object sender, EventArgs e)
+        private void comboBox2_SelectedIndexChanged_1(object sender, EventArgs e)
         {
 
             foreach (var it in _item)
             {
-                if (it.Value.Equals(comboBox2.Text.Split(' ')[0]));
+                if (it.Value.Equals(comboBox2.Text.Split(' ')[0]))
                 {
                     frm_fkPerson.Text = it.Key.ToString();
                 }
@@ -169,6 +178,8 @@ namespace CarRequest
 
         }
 
+        
+        
         // Car list
         private void comboBox14_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -188,6 +199,11 @@ namespace CarRequest
         private void frm_fkIncident_TextChanged_1(object sender, EventArgs e)
         {
            
+        }
+
+        private void frm_KM_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 
