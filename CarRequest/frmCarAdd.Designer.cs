@@ -67,9 +67,9 @@
             // 
             // model
             // 
-            this.model.Location = new System.Drawing.Point(199, 127);
+            this.model.Location = new System.Drawing.Point(201, 127);
             this.model.Name = "model";
-            this.model.Size = new System.Drawing.Size(174, 20);
+            this.model.Size = new System.Drawing.Size(172, 20);
             this.model.TabIndex = 4;
             // 
             // label2
@@ -121,9 +121,9 @@
             // 
             // Plaka
             // 
-            this.Plaka.Location = new System.Drawing.Point(199, 251);
+            this.Plaka.Location = new System.Drawing.Point(201, 251);
             this.Plaka.Name = "Plaka";
-            this.Plaka.Size = new System.Drawing.Size(174, 20);
+            this.Plaka.Size = new System.Drawing.Size(172, 20);
             this.Plaka.TabIndex = 12;
             this.Plaka.TextChanged += new System.EventHandler(this.Plaka_TextChanged);
             // 
@@ -147,9 +147,9 @@
             // 
             // lastKM
             // 
-            this.lastKM.Location = new System.Drawing.Point(199, 287);
+            this.lastKM.Location = new System.Drawing.Point(201, 287);
             this.lastKM.Name = "lastKM";
-            this.lastKM.Size = new System.Drawing.Size(174, 20);
+            this.lastKM.Size = new System.Drawing.Size(172, 20);
             this.lastKM.TabIndex = 15;
             this.lastKM.TextChanged += new System.EventHandler(this.LastKM_TextChanged);
             // 
@@ -174,17 +174,17 @@
             // 
             // rentStart
             // 
-            this.rentStart.Location = new System.Drawing.Point(199, 172);
+            this.rentStart.Location = new System.Drawing.Point(201, 172);
             this.rentStart.Name = "rentStart";
-            this.rentStart.Size = new System.Drawing.Size(174, 20);
+            this.rentStart.Size = new System.Drawing.Size(172, 20);
             this.rentStart.TabIndex = 19;
             this.rentStart.ValueChanged += new System.EventHandler(this.rentStart_ValueChanged);
             // 
             // rentEnd
             // 
-            this.rentEnd.Location = new System.Drawing.Point(199, 215);
+            this.rentEnd.Location = new System.Drawing.Point(201, 215);
             this.rentEnd.Name = "rentEnd";
-            this.rentEnd.Size = new System.Drawing.Size(174, 20);
+            this.rentEnd.Size = new System.Drawing.Size(172, 20);
             this.rentEnd.TabIndex = 20;
             // 
             // fkPerson

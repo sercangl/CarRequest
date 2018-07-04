@@ -212,12 +212,55 @@ namespace CarRequest
 
         }
 
-        public static void AddBack()
-        {
 
-        }
+        //public static void UpdateRent()
+        //{
+        //    SqlConnection con = null;
+        //    SqlCommand cmd = null;
 
-       
+
+        //    try
+        //    {
+                
+        //        con = new SqlConnection(connectionString);
+        //        cmd = new SqlCommand("INSERT INTO tblRent (KM,fkCar) VALUES (@fkPerson,@StartDate,@EndDate)", con);
+        //        cmd.Parameters.AddWithValue("@fkPerson", fkPerson);
+        //        cmd.Parameters.AddWithValue("@StartDate", StartDate);
+        //        cmd.Parameters.AddWithValue("@EndDate", EndDate);
+        //        //  cmd.Parameters.AddWithValue("@KM", KM);
+        //        //  cmd.Parameters.AddWithValue("@fkCar", fkCar);
+
+        //        if (con.State != System.Data.ConnectionState.Open)
+        //            con.Open();
+
+        //        cmd.ExecuteNonQuery();
+
+        //    }
+
+        //    catch (Exception)
+        //    {
+        //        throw;
+        //    }
+        //    finally
+        //    {
+        //        try
+        //        {
+        //            if (con.State == System.Data.ConnectionState.Open)
+        //            {
+        //                con.Dispose();
+        //            }
+        //        }
+        //        catch (Exception)
+        //        {
+
+
+        //        }
+
+        //    }
+        //}
+
+
+
 
 
     }
