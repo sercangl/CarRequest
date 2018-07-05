@@ -22,6 +22,7 @@ namespace CarRequest
         Dictionary<string, string> _item = new Dictionary<string, string>();
         Dictionary<string, string> _itemcar = new Dictionary<string, string>();
         Dictionary<string, string> _itemOther = new Dictionary<string, string>();
+        Dictionary<string, string> _itemcarr = new Dictionary<string, string>();
         SqlCommand cmd = new SqlCommand();
         public TalepOnayla()
         {
@@ -38,24 +39,28 @@ namespace CarRequest
         {
             SqlConnection baglanti = new SqlConnection(connectionString);
             baglanti.Open();
-            string arama = "SELECT DISTINCT * FROM  tblrent WHERE fkPerson=@personID and KM IS NULL or fkCar IS NULL";
+            string arama = "SELECT  * FROM  tblRent WHERE fkPerson=@personID and KM IS NULL and fkCar IS NULL";
             SqlCommand komut = new SqlCommand(arama, baglanti);
             komut.Parameters.AddWithValue("@personID", textBox2.Text);
-            
-         
+            komut.ExecuteNonQuery();
+
             SqlDataReader dr = komut.ExecuteReader();
             
 
             if (dr.Read())
             {
+               
                 dateTimePicker1.Text = dr["StartDate"].ToString();
                 dateTimePicker2.Text = dr["EndDate"].ToString();
                 textBox5.Text = dr["ID"].ToString();
-
                 
+                // Application.DoEvents();
+              //  comboBox1.Items.Remove(comboBox1.SelectedItem);
             }
             else
                 MessageBox.Show("Arama TAMAMLANAMADI...");
+
+            
             baglanti.Close();
         }
 
@@ -100,12 +105,13 @@ namespace CarRequest
             conn.Open();
             dr = cmd.ExecuteReader();
             
-            cmd.Parameters.AddWithValue("@CarID", textBox1.Text);
+         //   cmd.Parameters.AddWithValue("@CarID", textBox1.Text);
 
 
             while (dr.Read())
             {
                 _itemcar.Add(dr["ID"].ToString(), dr["Marka"].ToString());
+                _itemcarr.Add(dr["ID"].ToString(), dr["Model"].ToString());
                 //if (Convert.ToBoolean(_itemcar["IsAvailable"] == "0"))
                 comboBox2.Items.Add(dr["Marka"].ToString() + " " + dr["Model"].ToString());
             }
@@ -119,58 +125,102 @@ namespace CarRequest
             try
             {
 
+                // Formlarda girilen bilgileri veritabanında güncelliyor.
+                ////////////////////////////////////////////////////////////
                 SqlConnection baglanti = new SqlConnection(connectionString);
                 baglanti.Open();
                 string talepGüncelle = "UPDATE tblRent SET KM=@Km,fkCar=@fkCar,StartDate=@StartDate,EndDate=@EndDate WHERE  ID=@uniqueID";
                 SqlCommand komut = new SqlCommand(talepGüncelle, baglanti);
-               // SqlDataReader dr = komut.ExecuteReader();
-
-          
-                // if (dr.Read())
-                //   {
-               
-                string Kmm = kiloMetre.Text;
-                string fkkCar = textBox1.Text;
-                string uniqueeID = textBox5.Text;
 
 
-                komut.Parameters.AddWithValue("@StartDate", Convert.ToDateTime(dateTimePicker1.Text));
+                try
+                {
+
+                    komut.Parameters.AddWithValue("@StartDate", Convert.ToDateTime(dateTimePicker1.Text));
                     komut.Parameters.AddWithValue("@EndDate", Convert.ToDateTime(dateTimePicker2.Text));
-                    komut.Parameters.AddWithValue("@Km", Kmm);
-                    komut.Parameters.AddWithValue("@fkCar", fkkCar);
-                    komut.Parameters.AddWithValue("@uniqueID", uniqueeID);
+                    komut.Parameters.AddWithValue("@Km", int.Parse(kiloMetre.Text));
+                    komut.Parameters.AddWithValue("@fkCar", int.Parse(textBox1.Text));
+                    komut.Parameters.AddWithValue("@uniqueID", int.Parse(textBox5.Text));
+
+                      comboBox1.Items.Remove(comboBox1.SelectedItem);
+                    comboBox2.Items.Remove(comboBox2.SelectedItem);
+                    // Listelenen comboBox ta talep eden insanlarıon  ard arda açık kalmasını engelliyor.
+                    Form t = Application.OpenForms["TalepOnayla"];
+                    t.Close();
+
+
+
+
+                    string AvailCar = "UPDATE tblCar SET IsAvailable=0 WHERE  ID=@fkCar";
+                    SqlCommand komuut = new SqlCommand(AvailCar, baglanti);
+                    komuut.Parameters.AddWithValue("@fkCar",textBox1.Text);
+                    komuut.ExecuteNonQuery();
+
+
+
+
+
+
+
+                    if (baglanti.State != System.Data.ConnectionState.Open)
+                        baglanti.Open();
+
                     komut.ExecuteNonQuery();
+                 
+                        
+                }
 
 
-                    // cmd = new SqlCommand("INSERT INTO tblPerson (Name,Lastname,PersID,IsAdmin) VALUES (@name,@lastname,@persid,@isadmin)", con);
+                
+                catch (Exception)
+                {
+                    throw;
+                }
+                finally
+                {
+                    try
+                    {
+                        if (baglanti.State == System.Data.ConnectionState.Open)
+                        {
+                            baglanti.Dispose();
+                        }
+                    }
+                    catch (Exception)
+                    {
 
+
+                    }
+
+                }
                     ResetScreen();
                     MessageBox.Show("TALEBİ ONAYLADINIZ ..!");
-                    baglanti.Close();
-            //    }
-            //    else
-                //    MessageBox.Show("Talep ONAYLANMADI");
-               baglanti.Close();
-
-
-                //int.Parse(frm_KM.Text), int.Parse(frm_fkCar.Text)
-               
-
-
-
-
-
-
-
-
-
-
+                     this.Refresh();
+        
+                     baglanti.Close();
             }
 
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
+
+            // kişilere atanan arabaların müsaitlik durumunu düşürüyor
+
+            // kişilere atanan arabaların müsaitlik durumunu düşürüyor
+
+
+
+            
+
+
+
+
+
+
+
+
+
+
         }
 
         private void ResetScreen()
@@ -205,6 +255,8 @@ namespace CarRequest
 
         private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
         {
+
+
             foreach (var it in _itemcar)
             {
 
@@ -242,9 +294,8 @@ namespace CarRequest
 
         private void textBox2_TextChanged(object sender, EventArgs e)
         {
-            // var sdk = new SqlParameter("@KM", kiloMetre.Text.ToString());
-            //  cmd.Parameters.Add(sdk);
-            cmd.Parameters.AddWithValue("@KM", kiloMetre.Text);
+            
+            
         }
 
         private void comboBox1_SizeChanged(object sender, EventArgs e)
@@ -254,12 +305,13 @@ namespace CarRequest
 
         private void comboBox1_SelectedIndexChanged_1(object sender, EventArgs e)
         {
-
+            this.Refresh();
             foreach (var it in _itemOther)
             {
 
                 if (it.Value.Equals(comboBox1.Text.Split(' ')[0]))
                 {
+                    this.Refresh();
                     textBox2.Text = it.Key.ToString();
                 }
             }
