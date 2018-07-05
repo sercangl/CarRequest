@@ -23,7 +23,7 @@ namespace CarRequest
 
         }
 
-
+        // veri tabanındaki insanların isimlerini listeleyen fonksiyon
         public void personelListele()
         {
             SqlConnection conn = new SqlConnection();
@@ -38,36 +38,25 @@ namespace CarRequest
 
             while (dr.Read())
             {
-                //comboBox2.Items.Add(new { Text = dr["Name"].ToString(), Value = dr["ID"].ToString() });
+                
                 _item.Add(dr["ID"].ToString(), dr["Name"].ToString());
                 comboBox3.Items.Add(dr["Name"].ToString() + " " + dr["LastName"].ToString());
-
-                // + " " +dr["Lastname"].ToString()
-
-
-
+            
             }
-
-
             conn.Close();
-
-
-
-
-
-
         }
 
 
 
 
-
+    
         private void label2_Click(object sender, EventArgs e)
         {
 
 
         }
-
+        
+        // Form kayıt edildikten sonra textboxların içinin boşaltılmasını sağlayan fonksiyon
         private void ResetScreen()
         {
             comboBox3.Text = string.Empty;
@@ -108,7 +97,7 @@ namespace CarRequest
         {
 
         }
-
+        // Kayıt butonunun tıklandığında içinde yapılacakların belirlendiği fonksiyon
         private void btnSave_Click(object sender, EventArgs e)
         {
 
@@ -139,14 +128,14 @@ namespace CarRequest
         }
 
 
-        // kişi listele
+        // kişi listeleyen combobox
 
         private void comboBox3_SelectedIndexChanged(object sender, EventArgs e)
         {
 
             foreach (var it in _item)
             {
-                //.Split(' ')[0])
+               
                 if (it.Value.Equals(comboBox3.Text.Split(' ')[0]))
                 {
                     fkPerson.Text = it.Key.ToString();

@@ -31,7 +31,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.OnayButton = new System.Windows.Forms.Button();
-            this.RedButton = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.comboBox2 = new System.Windows.Forms.ComboBox();
             this.textBox1 = new System.Windows.Forms.TextBox();
@@ -62,30 +61,20 @@
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.Location = new System.Drawing.Point(214, 12);
             this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(184, 21);
+            this.comboBox1.Size = new System.Drawing.Size(251, 21);
             this.comboBox1.TabIndex = 1;
             this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged_1);
             this.comboBox1.SizeChanged += new System.EventHandler(this.comboBox1_SizeChanged);
             // 
             // OnayButton
             // 
-            this.OnayButton.Location = new System.Drawing.Point(258, 377);
+            this.OnayButton.Location = new System.Drawing.Point(216, 377);
             this.OnayButton.Name = "OnayButton";
-            this.OnayButton.Size = new System.Drawing.Size(124, 54);
+            this.OnayButton.Size = new System.Drawing.Size(250, 54);
             this.OnayButton.TabIndex = 3;
             this.OnayButton.Text = "Talep ONAYLA";
             this.OnayButton.UseVisualStyleBackColor = true;
             this.OnayButton.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // RedButton
-            // 
-            this.RedButton.Location = new System.Drawing.Point(21, 377);
-            this.RedButton.Name = "RedButton";
-            this.RedButton.Size = new System.Drawing.Size(112, 54);
-            this.RedButton.TabIndex = 8;
-            this.RedButton.Text = "Talebi REDDET";
-            this.RedButton.UseVisualStyleBackColor = true;
-            this.RedButton.Click += new System.EventHandler(this.button2_Click);
             // 
             // label4
             // 
@@ -100,9 +89,9 @@
             // comboBox2
             // 
             this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(215, 265);
+            this.comboBox2.Location = new System.Drawing.Point(214, 265);
             this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(184, 21);
+            this.comboBox2.Size = new System.Drawing.Size(252, 21);
             this.comboBox2.TabIndex = 10;
             this.comboBox2.SelectedIndexChanged += new System.EventHandler(this.comboBox2_SelectedIndexChanged);
             // 
@@ -111,7 +100,7 @@
             this.textBox1.Enabled = false;
             this.textBox1.Location = new System.Drawing.Point(215, 301);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(184, 20);
+            this.textBox1.Size = new System.Drawing.Size(251, 20);
             this.textBox1.TabIndex = 11;
             this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
@@ -129,7 +118,7 @@
             // 
             this.kiloMetre.Location = new System.Drawing.Point(215, 341);
             this.kiloMetre.Name = "kiloMetre";
-            this.kiloMetre.Size = new System.Drawing.Size(184, 20);
+            this.kiloMetre.Size = new System.Drawing.Size(251, 20);
             this.kiloMetre.TabIndex = 13;
             this.kiloMetre.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
             // 
@@ -138,15 +127,15 @@
             this.textBox2.Enabled = false;
             this.textBox2.Location = new System.Drawing.Point(214, 55);
             this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(184, 20);
+            this.textBox2.Size = new System.Drawing.Size(251, 20);
             this.textBox2.TabIndex = 14;
             this.textBox2.TextChanged += new System.EventHandler(this.textBox2_TextChanged_1);
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(128, 81);
+            this.button1.Location = new System.Drawing.Point(214, 81);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(183, 36);
+            this.button1.Size = new System.Drawing.Size(251, 36);
             this.button1.TabIndex = 16;
             this.button1.Text = "Ara";
             this.button1.UseVisualStyleBackColor = true;
@@ -166,8 +155,9 @@
             this.textBox5.Enabled = false;
             this.textBox5.Location = new System.Drawing.Point(214, 132);
             this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(184, 20);
+            this.textBox5.Size = new System.Drawing.Size(251, 20);
             this.textBox5.TabIndex = 20;
+            this.textBox5.TextChanged += new System.EventHandler(this.textBox5_TextChanged);
             // 
             // label3
             // 
@@ -205,16 +195,16 @@
             // 
             // dateTimePicker2
             // 
-            this.dateTimePicker2.Location = new System.Drawing.Point(219, 212);
+            this.dateTimePicker2.Location = new System.Drawing.Point(214, 212);
             this.dateTimePicker2.Name = "dateTimePicker2";
-            this.dateTimePicker2.Size = new System.Drawing.Size(180, 20);
+            this.dateTimePicker2.Size = new System.Drawing.Size(252, 20);
             this.dateTimePicker2.TabIndex = 25;
             // 
             // TalepOnayla
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(457, 470);
+            this.ClientSize = new System.Drawing.Size(475, 443);
             this.Controls.Add(this.dateTimePicker2);
             this.Controls.Add(this.dateTimePicker1);
             this.Controls.Add(this.label7);
@@ -229,7 +219,6 @@
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.comboBox2);
             this.Controls.Add(this.label4);
-            this.Controls.Add(this.RedButton);
             this.Controls.Add(this.OnayButton);
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.label1);
@@ -245,7 +234,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.Button OnayButton;
-        private System.Windows.Forms.Button RedButton;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.ComboBox comboBox2;
         private System.Windows.Forms.TextBox textBox1;

@@ -15,15 +15,15 @@ namespace CarRequest
 
     {
 
-
+        // kolaylık olması bakımından tanımlanmış global değişkenler
         static string connectionString = "Server=EPDI-4W68LX1\\SQLEXPRESS;Initial Catalog=CarRequest;Integrated Security=SSPI;";
-
-
         Dictionary<string, string> _item = new Dictionary<string, string>();
         Dictionary<string, string> _itemcar = new Dictionary<string, string>();
         Dictionary<string, string> _itemOther = new Dictionary<string, string>();
         Dictionary<string, string> _itemcarr = new Dictionary<string, string>();
         SqlCommand cmd = new SqlCommand();
+
+        // Formumuzun çalıştığı ana fonksiyonumuz
         public TalepOnayla()
         {
             InitializeComponent();
@@ -34,7 +34,7 @@ namespace CarRequest
 
         }
 
-
+        //  Arama butonunun çalıştığı fonksiyon
         private void button1_Click_1(object sender, EventArgs e)
         {
             SqlConnection baglanti = new SqlConnection(connectionString);
@@ -70,9 +70,7 @@ namespace CarRequest
         }
 
 
-
-
-
+         // Person isimlerinin gözüktüğü ve seçilmenin yapıldığı ComboBox
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
 
@@ -86,19 +84,16 @@ namespace CarRequest
 
 
         }
-
-
-
-
-
-
-
+        
+        
+        
+        // Combobox ın gözüken arabaların veritabanından çekilmesini sağlayan fonksiyon
         public void arabalistele()
         {
             SqlConnection conn = new SqlConnection();
             conn.ConnectionString = "Server=EPDI-4W68LX1\\SQLEXPRESS;Initial Catalog=CarRequest;Integrated Security=SSPI;";
             SqlCommand cmd = new SqlCommand();
-            cmd.CommandText = "SELECT Marka,Model,ID,IsAvailable FROM tblCar WHERE  IsAvailable=1 ";
+            cmd.CommandText = "SELECT Marka,Model,ID,IsAvailable,Plaka FROM tblCar WHERE  IsAvailable=1 ";
             cmd.Connection = conn;
             cmd.CommandType = CommandType.Text;
             SqlDataReader dr;
@@ -113,19 +108,19 @@ namespace CarRequest
                 _itemcar.Add(dr["ID"].ToString(), dr["Model"].ToString());
 //              _itemcarr.Add(dr["ID"].ToString(), dr["Model"].ToString());
                 //if (Convert.ToBoolean(_itemcar["IsAvailable"] == "0"))
-                comboBox2.Items.Add(dr["Model"].ToString() + " - (" + dr["Marka"].ToString() + ") ");
+                comboBox2.Items.Add(dr["Model"].ToString() + " - (" + dr["Marka"].ToString() + ") ---------" + dr["Plaka"].ToString());
             }
 
             conn.Close();
 
         }
-
+        // Formlarda girilen bilgileri veritabanında güncelliyor.
         private void button1_Click(object sender, EventArgs e)
         {
             try
             {
 
-                // Formlarda girilen bilgileri veritabanında güncelliyor.
+                
                 ////////////////////////////////////////////////////////////
                 SqlConnection baglanti = new SqlConnection(connectionString);
                 baglanti.Open();
@@ -228,7 +223,7 @@ namespace CarRequest
 
 
         }
-
+        // Form kaydedildikten sonra formların içinin boşaltılmasını sağlıyor
         private void ResetScreen()
         {
             comboBox1.Text = string.Empty;
@@ -258,7 +253,7 @@ namespace CarRequest
         {
 
         }
-
+        // arabaların içinde gözüktüğü combobox  arabalisteleme fonksiyonunu kullanıyor
         private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
         {
 
@@ -337,55 +332,7 @@ namespace CarRequest
         {
 
         }
-
-        public static void AddRentt(int fkPerson, DateTime StartDate, DateTime EndDate)
-        {
-            SqlConnection con = null;
-            SqlCommand cmd = null;
-
-
-            try
-            {
-                //,KM,fkCar    ,@KM,@fkCar
-                con = new SqlConnection(connectionString);
-                cmd = new SqlCommand("INSERT INTO tblRent (fkPerson,StartDate,EndDate) VALUES (@fkPerson,@StartDate,@EndDate)", con);
-                cmd.Parameters.AddWithValue("@fkPerson", fkPerson);
-                cmd.Parameters.AddWithValue("@StartDate", StartDate);
-                cmd.Parameters.AddWithValue("@EndDate", EndDate);
-                //  cmd.Parameters.AddWithValue("@KM", KM);
-                //  cmd.Parameters.AddWithValue("@fkCar", fkCar);
-
-                if (con.State != System.Data.ConnectionState.Open)
-                    con.Open();
-
-                cmd.ExecuteNonQuery();
-
-            }
-
-            catch (Exception)
-            {
-                throw;
-            }
-            finally
-            {
-                try
-                {
-                    if (con.State == System.Data.ConnectionState.Open)
-                    {
-                        con.Dispose();
-                    }
-                }
-                catch (Exception)
-                {
-
-
-                }
-
-            }
-
-
-        }
-
+        // Combo box üzerindeki isimleri getiren textbox'a atan fonksiyon
 
         public void personListeleme()
         {
@@ -416,21 +363,10 @@ namespace CarRequest
                     _itemOther.Add(dr["ID"].ToString(), dr["Name"].ToString());
                     comboBox1.Items.Add(dr["Name"].ToString() + " " + dr["LastName"].ToString());
 
-                   // cmd.CommandText = "SELECT ID,StartDate,EndDate FROM tblRent WHERE  ID = PersonID";
-                    
-
-                    
-                    //textBox5.Text = dr["ID"].ToString();
-                    //textBox3.Text = dr["StartDate"].ToString();
-                    //textBox4.Text = dr["EndDate"].ToString();
+                   
                 }
 
-
-                //Seçilen kişinin StartDate ve EndDate ini çekmeye yarayan part...
-
-
-
-
+                
             }
 
             conn.Close();
@@ -446,69 +382,12 @@ namespace CarRequest
 
         }
 
-      
+        private void textBox5_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
 
 
 
-//public void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
-//{
-
-
-
-
-//    foreach (var it in _itemOther)
-//    {
-//      //  ((ComboBox)sender).SelectedValue = textBox1;
-
-
-//        if (it.Value.Equals(comboBox1.Text.Split(' ')[0]))
-//        {
-//            txtBox1.Text = it.Key.ToString();
-//        }
-//    }
-
-
-//}
-
-
-
-
-//public void personListeleme()
-//{
-
-//    SqlConnection conn = new SqlConnection();
-//    conn.ConnectionString = "Server=EPDI-4W68LX1\\SQLEXPRESS;Initial Catalog=CarRequest;Integrated Security=SSPI;";
-//    SqlCommand cmd = new SqlCommand();
-//    cmd.CommandText = "SELECT DISTINCT * FROM tblRent K, tblPerson Y WHERE  K.fkPerson = Y.ID and K.KM IS NULL  ";
-//    cmd.Connection = conn;
-//    cmd.CommandType = CommandType.Text;
-//    SqlDataReader dr;
-//    dr = cmd.ExecuteReader();
-
-//    // PersonID parametresi için
-//    // var sdf = new SqlParameter("@PersonID", textBox2.Text.ToString());
-//    // cmd.Parameters.Add(sdf);
-
-//    //cmd.Parameters.AddWithValue("@PersonID", textBox2.Text);
-
-
-//    conn.Open();
-
-//    cmd.Parameters.AddWithValue("@PersonID", textBox2.Text);
-//    cmd.CommandText = "Select From Where ";
-//    while (dr.Read())
-//    {
-
-//        if (!_itemOther.ContainsKey(dr["ID"].ToString()))
-//        {
-//            _itemOther.Add(dr["ID"].ToString(), dr["Name"].ToString());
-//            comboBox1.Items.Add(dr["Name"].ToString() + " " + dr["LastName"].ToString());
-
-
-//        }
-
-//    }
-//    conn.Close();
-//}

@@ -12,6 +12,14 @@ namespace CarRequest
     {
         static string connectionString = "Server=EPDI-4W68LX1\\SQLEXPRESS;Initial Catalog=CarRequest;Integrated Security=SSPI;";
         
+        internal static void AddRent(int v1, DateTime dateTime1, DateTime dateTime2)
+        {
+            throw new NotImplementedException();
+        }
+
+
+
+        //Kişileri veri tabanına ekleyen fonksiyon
         public static void AddPerson(string name, string lastname, int persID, bool isadmin)
         {
 
@@ -58,12 +66,9 @@ namespace CarRequest
 
 
         }
-        //, int v2, int v3, int v4, int v5
-        internal static void AddRent(int v1, DateTime dateTime1, DateTime dateTime2)
-        {
-            throw new NotImplementedException();
-        }
-
+      
+        
+        //Kaza raporlarını veri tabanına giren fonksiyon 
         public static void AddAccident(string Description,bool RepairRequired,DateTime RepairTime)
         {
             SqlConnection con = null;
@@ -106,7 +111,9 @@ namespace CarRequest
 
 
         }
+        
 
+        //Eklenecek arabanın bilgilerini veritabanına giren fonksiyon
         public static void AddCar(int fkPerson,string marka,string model,DateTime rentStart,DateTime rentEnd,string plaka,int lastKm,bool available )
         {
 
@@ -163,7 +170,7 @@ namespace CarRequest
         }
         
 
-        //
+      // Talep edilen aracın bilgilerini veritabanına giren fonksiyon
         public static void AddRentt(int fkPerson,DateTime StartDate,DateTime EndDate)
         {
             SqlConnection con = null;
@@ -172,15 +179,13 @@ namespace CarRequest
 
             try
             {
-                //,KM,fkCar    ,@KM,@fkCar
+      
                 con = new SqlConnection(connectionString);
                 cmd = new SqlCommand("INSERT INTO tblRent (fkPerson,StartDate,EndDate) VALUES (@fkPerson,@StartDate,@EndDate)", con);
                 cmd.Parameters.AddWithValue("@fkPerson", fkPerson);
                 cmd.Parameters.AddWithValue("@StartDate", StartDate);
                 cmd.Parameters.AddWithValue("@EndDate", EndDate);
-              //  cmd.Parameters.AddWithValue("@KM", KM);
-              //  cmd.Parameters.AddWithValue("@fkCar", fkCar);
-
+              
                 if (con.State != System.Data.ConnectionState.Open)
                     con.Open();
 
@@ -211,57 +216,5 @@ namespace CarRequest
 
 
         }
-
-
-        //public static void UpdateRent()
-        //{
-        //    SqlConnection con = null;
-        //    SqlCommand cmd = null;
-
-
-        //    try
-        //    {
-                
-        //        con = new SqlConnection(connectionString);
-        //        cmd = new SqlCommand("INSERT INTO tblRent (KM,fkCar) VALUES (@fkPerson,@StartDate,@EndDate)", con);
-        //        cmd.Parameters.AddWithValue("@fkPerson", fkPerson);
-        //        cmd.Parameters.AddWithValue("@StartDate", StartDate);
-        //        cmd.Parameters.AddWithValue("@EndDate", EndDate);
-        //        //  cmd.Parameters.AddWithValue("@KM", KM);
-        //        //  cmd.Parameters.AddWithValue("@fkCar", fkCar);
-
-        //        if (con.State != System.Data.ConnectionState.Open)
-        //            con.Open();
-
-        //        cmd.ExecuteNonQuery();
-
-        //    }
-
-        //    catch (Exception)
-        //    {
-        //        throw;
-        //    }
-        //    finally
-        //    {
-        //        try
-        //        {
-        //            if (con.State == System.Data.ConnectionState.Open)
-        //            {
-        //                con.Dispose();
-        //            }
-        //        }
-        //        catch (Exception)
-        //        {
-
-
-        //        }
-
-        //    }
-        //}
-
-
-
-
-
     }
 }

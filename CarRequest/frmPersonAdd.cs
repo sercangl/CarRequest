@@ -16,7 +16,8 @@ namespace CarRequest
         {
             InitializeComponent();
         }
-
+        
+        // Kayıt butonuna tıklandığında db actions dan add persona bağlanıp veritabanına veri giren buton
         private void btnSave_Click(object sender, EventArgs e)
         {
             try
@@ -33,6 +34,7 @@ namespace CarRequest
 
         }
 
+        // veri tabanına 
         private void ResetScreen()
         {
             txtName.Text = string.Empty;
