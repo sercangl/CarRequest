@@ -110,10 +110,10 @@ namespace CarRequest
 
             while (dr.Read())
             {
-                _itemcar.Add(dr["ID"].ToString(), dr["Marka"].ToString());
-                _itemcarr.Add(dr["ID"].ToString(), dr["Model"].ToString());
+                _itemcar.Add(dr["ID"].ToString(), dr["Model"].ToString());
+//              _itemcarr.Add(dr["ID"].ToString(), dr["Model"].ToString());
                 //if (Convert.ToBoolean(_itemcar["IsAvailable"] == "0"))
-                comboBox2.Items.Add(dr["Marka"].ToString() + " " + dr["Model"].ToString());
+                comboBox2.Items.Add(dr["Model"].ToString() + " - (" + dr["Marka"].ToString() + ") ");
             }
 
             conn.Close();
@@ -142,7 +142,16 @@ namespace CarRequest
                     komut.Parameters.AddWithValue("@fkCar", int.Parse(textBox1.Text));
                     komut.Parameters.AddWithValue("@uniqueID", int.Parse(textBox5.Text));
 
-                      comboBox1.Items.Remove(comboBox1.SelectedItem);
+
+
+                    string AvailCar = "UPDATE tblCar SET IsAvailable=0 WHERE  ID=@carID";
+                    SqlCommand komuut = new SqlCommand(AvailCar, baglanti);
+                    komuut.Parameters.AddWithValue("@carID", int.Parse(textBox1.Text));
+                    komuut.ExecuteNonQuery();
+
+
+
+                    comboBox1.Items.Remove(comboBox1.SelectedItem);
                     comboBox2.Items.Remove(comboBox2.SelectedItem);
                     // Listelenen comboBox ta talep eden insanlarıon  ard arda açık kalmasını engelliyor.
                     Form t = Application.OpenForms["TalepOnayla"];
@@ -151,10 +160,7 @@ namespace CarRequest
 
 
 
-                    string AvailCar = "UPDATE tblCar SET IsAvailable=0 WHERE  ID=@fkCar";
-                    SqlCommand komuut = new SqlCommand(AvailCar, baglanti);
-                    komuut.Parameters.AddWithValue("@fkCar",textBox1.Text);
-                    komuut.ExecuteNonQuery();
+                    
 
 
 
