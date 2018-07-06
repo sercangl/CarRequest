@@ -29,39 +29,73 @@ namespace CarRequest
             InitializeComponent();
             personListeleme();
             arabalistele();
-            
+
 
 
         }
 
+
+
+
+
+
+        // talep etme formunda kullanılan arama yapan fonksiyon
+        //public void talepEtArama()
+        //{
+
+        //    SqlConnection baglanti = new SqlConnection(connectionString);
+        //    baglanti.Open();
+        //    string arama = "SELECT  * FROM  tblRent WHERE fkPerson=@personID and KM IS NULL and fkCar IS NULL";
+        //    SqlCommand komut = new SqlCommand(arama, baglanti);
+        //    komut.Parameters.AddWithValue("@personID", textBox2.Text);
+        //    komut.ExecuteNonQuery();
+
+        //    SqlDataReader dr = komut.ExecuteReader();
+
+
+        //    if (dr.Read())
+        //    {
+
+        //        dateTimePicker1.Text = dr["StartDate"].ToString();
+        //        dateTimePicker2.Text = dr["EndDate"].ToString();
+        //        textBox5.Text = dr["ID"].ToString();
+
+        //        // Application.DoEvents();
+        //        //  comboBox1.Items.Remove(comboBox1.SelectedItem);
+        //    }
+        //    else
+        //        MessageBox.Show("Arama TAMAMLANAMADI...");
+
+
+        //    baglanti.Close();
+
+        //}
+        
+       
+            
+            
+        // talep etme formunda kullanılan arama yapan fonksiyon
+        public void talepEtArama()
+        {
+            DataTable dt = DBActions.talepEtArama(int.Parse(textBox2.Text));
+
+            dateTimePicker1.Text = dt.Rows[0]["StartDate"].ToString();
+            dateTimePicker2.Text = dt.Rows[0]["EndDate"].ToString();
+            textBox5.Text = dt.Rows[0]["ID"].ToString();
+
+        }
+
+
+
+
+
+
+
+
         //  Arama butonunun çalıştığı fonksiyon
         private void button1_Click_1(object sender, EventArgs e)
         {
-            SqlConnection baglanti = new SqlConnection(connectionString);
-            baglanti.Open();
-            string arama = "SELECT  * FROM  tblRent WHERE fkPerson=@personID and KM IS NULL and fkCar IS NULL";
-            SqlCommand komut = new SqlCommand(arama, baglanti);
-            komut.Parameters.AddWithValue("@personID", textBox2.Text);
-            komut.ExecuteNonQuery();
-
-            SqlDataReader dr = komut.ExecuteReader();
-            
-
-            if (dr.Read())
-            {
-               
-                dateTimePicker1.Text = dr["StartDate"].ToString();
-                dateTimePicker2.Text = dr["EndDate"].ToString();
-                textBox5.Text = dr["ID"].ToString();
-                
-                // Application.DoEvents();
-              //  comboBox1.Items.Remove(comboBox1.SelectedItem);
-            }
-            else
-                MessageBox.Show("Arama TAMAMLANAMADI...");
-
-            
-            baglanti.Close();
+            talepEtArama();
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -70,7 +104,7 @@ namespace CarRequest
         }
 
 
-         // Person isimlerinin gözüktüğü ve seçilmenin yapıldığı ComboBox
+        // Person isimlerinin gözüktüğü ve seçilmenin yapıldığı ComboBox
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
 
@@ -84,9 +118,9 @@ namespace CarRequest
 
 
         }
-        
-        
-        
+
+
+
         // Combobox ın gözüken arabaların veritabanından çekilmesini sağlayan fonksiyon
         public void arabalistele()
         {
@@ -99,14 +133,14 @@ namespace CarRequest
             SqlDataReader dr;
             conn.Open();
             dr = cmd.ExecuteReader();
-            
-         //   cmd.Parameters.AddWithValue("@CarID", textBox1.Text);
+
+            //   cmd.Parameters.AddWithValue("@CarID", textBox1.Text);
 
 
             while (dr.Read())
             {
                 _itemcar.Add(dr["ID"].ToString(), dr["Model"].ToString());
-//              _itemcarr.Add(dr["ID"].ToString(), dr["Model"].ToString());
+                //              _itemcarr.Add(dr["ID"].ToString(), dr["Model"].ToString());
                 //if (Convert.ToBoolean(_itemcar["IsAvailable"] == "0"))
                 comboBox2.Items.Add(dr["Model"].ToString() + " - (" + dr["Marka"].ToString() + ") ---------" + dr["Plaka"].ToString());
             }
@@ -120,7 +154,7 @@ namespace CarRequest
             try
             {
 
-                
+
                 ////////////////////////////////////////////////////////////
                 SqlConnection baglanti = new SqlConnection(connectionString);
                 baglanti.Open();
@@ -155,7 +189,7 @@ namespace CarRequest
 
 
 
-                    
+
 
 
 
@@ -167,12 +201,12 @@ namespace CarRequest
                         baglanti.Open();
 
                     komut.ExecuteNonQuery();
-                 
-                        
+
+
                 }
 
 
-                
+
                 catch (Exception)
                 {
                     throw;
@@ -193,11 +227,11 @@ namespace CarRequest
                     }
 
                 }
-                    ResetScreen();
-                    MessageBox.Show("TALEBİ ONAYLADINIZ ..!");
-                     this.Refresh();
-        
-                     baglanti.Close();
+                ResetScreen();
+                MessageBox.Show("TALEBİ ONAYLADINIZ ..!");
+                this.Refresh();
+
+                baglanti.Close();
             }
 
             catch (Exception ex)
@@ -211,7 +245,7 @@ namespace CarRequest
 
 
 
-            
+
 
 
 
@@ -295,8 +329,8 @@ namespace CarRequest
 
         private void textBox2_TextChanged(object sender, EventArgs e)
         {
-            
-            
+
+
         }
 
         private void comboBox1_SizeChanged(object sender, EventArgs e)
@@ -363,10 +397,10 @@ namespace CarRequest
                     _itemOther.Add(dr["ID"].ToString(), dr["Name"].ToString());
                     comboBox1.Items.Add(dr["Name"].ToString() + " " + dr["LastName"].ToString());
 
-                   
+
                 }
 
-                
+
             }
 
             conn.Close();

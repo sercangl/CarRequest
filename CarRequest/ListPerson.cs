@@ -19,11 +19,12 @@ namespace CarRequest
 
         static string connectionString = "Server=EPDI-4W68LX1\\SQLEXPRESS;Initial Catalog=CarRequest;Integrated Security=SSPI;";
 
+
         public void ListePerson()
         {
             SqlConnection con = new SqlConnection(connectionString);
             DataTable dt = new DataTable();
-            SqlDataAdapter da = new SqlDataAdapter("select * from tblPerson", con);
+            SqlDataAdapter da = new SqlDataAdapter("ListePerson", con);
             da.Fill(dt);
             dataGridView1.DataSource = dt;
 

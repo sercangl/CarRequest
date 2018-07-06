@@ -70,28 +70,28 @@
             // miAddCar
             // 
             this.miAddCar.Name = "miAddCar";
-            this.miAddCar.Size = new System.Drawing.Size(157, 22);
+            this.miAddCar.Size = new System.Drawing.Size(180, 22);
             this.miAddCar.Text = "Araba Ekle";
             this.miAddCar.Click += new System.EventHandler(this.miAddCar_Click_1);
             // 
             // miAddPerson
             // 
             this.miAddPerson.Name = "miAddPerson";
-            this.miAddPerson.Size = new System.Drawing.Size(157, 22);
+            this.miAddPerson.Size = new System.Drawing.Size(180, 22);
             this.miAddPerson.Text = "Kişi Ekle";
             this.miAddPerson.Click += new System.EventHandler(this.miAddPerson_Click);
             // 
             // kişileriListeleToolStripMenuItem
             // 
             this.kişileriListeleToolStripMenuItem.Name = "kişileriListeleToolStripMenuItem";
-            this.kişileriListeleToolStripMenuItem.Size = new System.Drawing.Size(157, 22);
+            this.kişileriListeleToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.kişileriListeleToolStripMenuItem.Text = "Kişileri Listele";
             this.kişileriListeleToolStripMenuItem.Click += new System.EventHandler(this.kişileriListeleToolStripMenuItem_Click);
             // 
             // arabalarıListeleToolStripMenuItem
             // 
             this.arabalarıListeleToolStripMenuItem.Name = "arabalarıListeleToolStripMenuItem";
-            this.arabalarıListeleToolStripMenuItem.Size = new System.Drawing.Size(157, 22);
+            this.arabalarıListeleToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.arabalarıListeleToolStripMenuItem.Text = "Arabaları Listele";
             this.arabalarıListeleToolStripMenuItem.Click += new System.EventHandler(this.arabalarıListeleToolStripMenuItem_Click);
             // 
@@ -108,14 +108,14 @@
             // miTalep
             // 
             this.miTalep.Name = "miTalep";
-            this.miTalep.Size = new System.Drawing.Size(122, 22);
+            this.miTalep.Size = new System.Drawing.Size(180, 22);
             this.miTalep.Text = "Talep Et";
             this.miTalep.Click += new System.EventHandler(this.miTalep_Click);
             // 
             // kazaEkleToolStripMenuItem
             // 
             this.kazaEkleToolStripMenuItem.Name = "kazaEkleToolStripMenuItem";
-            this.kazaEkleToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
+            this.kazaEkleToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.kazaEkleToolStripMenuItem.Text = "Kaza Ekle";
             this.kazaEkleToolStripMenuItem.Click += new System.EventHandler(this.kazaEkleToolStripMenuItem_Click);
             // 
@@ -131,14 +131,14 @@
             // miRecordIncoming
             // 
             this.miRecordIncoming.Name = "miRecordIncoming";
-            this.miRecordIncoming.Size = new System.Drawing.Size(180, 22);
+            this.miRecordIncoming.Size = new System.Drawing.Size(170, 22);
             this.miRecordIncoming.Text = "Gelen Araç Kaydet";
             this.miRecordIncoming.Click += new System.EventHandler(this.miRecordIncoming_Click);
             // 
             // miTalepApprove
             // 
             this.miTalepApprove.Name = "miTalepApprove";
-            this.miTalepApprove.Size = new System.Drawing.Size(180, 22);
+            this.miTalepApprove.Size = new System.Drawing.Size(170, 22);
             this.miTalepApprove.Text = "Talep Onayla";
             this.miTalepApprove.Click += new System.EventHandler(this.miTalepApprove_Click);
             // 
