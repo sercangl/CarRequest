@@ -42,6 +42,9 @@ namespace CarRequest
 
             cmd.Parameters.AddWithValue("@PersonID", textBox1.Text.ToString());
 
+
+
+         //   SqlCommand komut = "UPDATE tblRent SET EndDate=@now Where @PersonID=ID"
             
 
             SqlDataReader dr;
@@ -81,6 +84,32 @@ namespace CarRequest
 
         private void btnSave_Click(object sender, EventArgs e)
         {
+
+            SqlConnection baglanti = new SqlConnection(connectionString);
+            baglanti.Open();
+            string güncelleme = "UPDATE tblRent    SET  fkIncidents=@fkIncident  WHERE ID=@rentID";
+
+            SqlCommand komut = new SqlCommand(güncelleme, baglanti);
+
+            komut.Parameters.AddWithValue("@fkIncident", textBox3.Text);
+
+            komut.Parameters.AddWithValue("@rentID", textBox2.Text);
+            komut.ExecuteNonQuery();
+            ResetScreen();
+
+            // komut.ExecuteNonQuery();
+
+                MessageBox.Show("BAŞARIYLA KAYDEDİLDİ....");
+
+            // ResetScreen();
+            baglanti.Close();
+
+
+
+
+
+
+
 
         }
 
@@ -159,6 +188,8 @@ namespace CarRequest
             frmdescription.Text = string.Empty;
             repairTime.Text = string.Empty;
             repairCheck.Text = string.Empty;
+            textBox3.Text = string.Empty;
+
         }
 
 
@@ -171,10 +202,57 @@ namespace CarRequest
 
         private void button2_Click(object sender, EventArgs e)
         {
-            
+
+
+
+            ResetScreen();
             }
 
-          
-        
+        private void textBox2_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label6_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            DBActions.AddAccident(frmdescription.Text, repairCheck.Checked, Convert.ToDateTime(repairTime.Text));
+
+           
+            SqlConnection baglanti = new SqlConnection(connectionString);
+            baglanti.Open();
+            string arama = "SELECT  ID FROM  tblIncident WHERE  Description = @description";
+
+            SqlCommand komut = new SqlCommand(arama, baglanti);
+            
+            komut.Parameters.AddWithValue("@description", frmdescription.Text);
+            // komut.ExecuteNonQuery();
+
+            SqlDataReader dr = komut.ExecuteReader();
+
+
+            if (dr.Read())
+            {
+                textBox3.Text = dr["ID"].ToString();
+
+            }
+            else
+                MessageBox.Show("Arama TAMAMLANAMADI...");
+
+           // ResetScreen();
+            baglanti.Close();
+
+
+            
+        }
+
+        private void textBox3_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
