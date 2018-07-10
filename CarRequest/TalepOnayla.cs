@@ -34,9 +34,7 @@ namespace CarRequest
 
         }
 
-
-
-
+        
 
 
         // talep etme formunda kullanılan arama yapan fonksiyon
@@ -79,6 +77,7 @@ namespace CarRequest
         {
             DataTable dt = DBActions.talepEtArama(int.Parse(textBox2.Text));
 
+            
             dateTimePicker1.Text = dt.Rows[0]["StartDate"].ToString();
             dateTimePicker2.Text = dt.Rows[0]["EndDate"].ToString();
             textBox5.Text = dt.Rows[0]["ID"].ToString();
@@ -86,8 +85,28 @@ namespace CarRequest
         }
 
 
+        public void  talepEtKaydet()
+        {
+           DBActions.talepEtKaydet(Convert.ToDateTime(dateTimePicker1.Text),Convert.ToDateTime(dateTimePicker2.Text),int.Parse(kiloMetre.Text),int.Parse(textBox1.Text),int.Parse(textBox5.Text));
+            // DataTable dt = 
+
+            //dateTimePicker1.Text = dt.Rows[0]["StartDate"].ToString();
+            //dateTimePicker2.Text = dt.Rows[0]["EndDate"].ToString();
+            //kiloMetre.Text = dt.Rows[0]["Km"].ToString();
+            //textBox1.Text = dt.Rows[0]["fkCar"].ToString();
+            //textBox5.Text = dt.Rows[0]["uniqueID"].ToString();
 
 
+        }
+
+        public void talepEtAraba()
+        {
+            DBActions.talepEtAraba(int.Parse(textBox1.Text));
+
+            // textBox1.Text = dt.Rows[0]["carID"].ToString();
+            
+
+        }
 
 
 
@@ -148,115 +167,34 @@ namespace CarRequest
             conn.Close();
 
         }
+       
+        
+        
         // Formlarda girilen bilgileri veritabanında güncelliyor.
         private void button1_Click(object sender, EventArgs e)
         {
-            try
-            {
 
-
-                ////////////////////////////////////////////////////////////
-                SqlConnection baglanti = new SqlConnection(connectionString);
-                baglanti.Open();
-                string talepGüncelle = "UPDATE tblRent SET KM=@Km,fkCar=@fkCar,StartDate=@StartDate,EndDate=@EndDate WHERE  ID=@uniqueID";
-                SqlCommand komut = new SqlCommand(talepGüncelle, baglanti);
-
-
-                try
-                {
-
-                    komut.Parameters.AddWithValue("@StartDate", Convert.ToDateTime(dateTimePicker1.Text));
-                    komut.Parameters.AddWithValue("@EndDate", Convert.ToDateTime(dateTimePicker2.Text));
-                    komut.Parameters.AddWithValue("@Km", int.Parse(kiloMetre.Text));
-                    komut.Parameters.AddWithValue("@fkCar", int.Parse(textBox1.Text));
-                    komut.Parameters.AddWithValue("@uniqueID", int.Parse(textBox5.Text));
-
-
-
-                    string AvailCar = "UPDATE tblCar SET IsAvailable=0 WHERE  ID=@carID";
-                    SqlCommand komuut = new SqlCommand(AvailCar, baglanti);
-                    komuut.Parameters.AddWithValue("@carID", int.Parse(textBox1.Text));
-                    komuut.ExecuteNonQuery();
-
-
-
-                    comboBox1.Items.Remove(comboBox1.SelectedItem);
-                    comboBox2.Items.Remove(comboBox2.SelectedItem);
-                    // Listelenen comboBox ta talep eden insanlarıon  ard arda açık kalmasını engelliyor.
-                    Form t = Application.OpenForms["TalepOnayla"];
-                    t.Close();
-
-
-
-
-
-
-
-
-
-
-
-
-                    if (baglanti.State != System.Data.ConnectionState.Open)
-                        baglanti.Open();
-
-                    komut.ExecuteNonQuery();
-
-
-                }
-
-
-
-                catch (Exception)
-                {
-                    throw;
-                }
-                finally
-                {
-                    try
-                    {
-                        if (baglanti.State == System.Data.ConnectionState.Open)
-                        {
-                            baglanti.Dispose();
-                        }
-                    }
-                    catch (Exception)
-                    {
-
-
-                    }
-
-                }
+            talepEtAraba();
+            talepEtKaydet();
+                
                 ResetScreen();
                 MessageBox.Show("TALEBİ ONAYLADINIZ ..!");
                 this.Refresh();
-
-                baglanti.Close();
-            }
-
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
+            
+         
 
             // kişilere atanan arabaların müsaitlik durumunu düşürüyor
 
             // kişilere atanan arabaların müsaitlik durumunu düşürüyor
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+            
         }
+       
+        
+        
+        
+        
+        
         // Form kaydedildikten sonra formların içinin boşaltılmasını sağlıyor
         private void ResetScreen()
         {

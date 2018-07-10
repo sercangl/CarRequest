@@ -5,6 +5,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace CarRequest
 {
@@ -18,6 +19,11 @@ namespace CarRequest
         {
             throw new NotImplementedException();
         }
+
+
+
+
+
 
 
 
@@ -125,6 +131,8 @@ namespace CarRequest
 
         }
 
+
+
         internal static DataTable talepEtArama(int personID)
         {
             SqlConnection con = null;
@@ -136,6 +144,7 @@ namespace CarRequest
                 //SELECT  * FROM  tblRent WHERE fkPerson=@personID and KM IS NULL and fkCar IS NULL
                 con = new SqlConnection(connectionString);
                 cmd = new SqlCommand("talepEtArama", con);
+                cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("@personID", personID);
                 ret = new DataTable("GenericTable");
                 adp = new SqlDataAdapter(cmd);
@@ -150,6 +159,80 @@ namespace CarRequest
             return ret;
 
         }
+        
+
+        /*
+         * 
+         * 
+         *          komut.Parameters.AddWithValue("@StartDate", Convert.ToDateTime(dateTimePicker1.Text));
+                    komut.Parameters.AddWithValue("@EndDate", Convert.ToDateTime(dateTimePicker2.Text));
+                    komut.Parameters.AddWithValue("@Km", int.Parse(kiloMetre.Text));
+                    komut.Parameters.AddWithValue("@fkCar", int.Parse(textBox1.Text));
+                    komut.Parameters.AddWithValue("@uniqueID", int.Parse(textBox5.Text));
+         * 
+         * 
+         * */
+
+        internal static DataTable talepEtKaydet(DateTime StartDate,DateTime EndDate,int Km, int fkCar,int uniqueID)
+        {
+            SqlConnection con = null;
+            SqlCommand cmd = null;
+            SqlDataAdapter adp = null;
+            DataTable ret = null;
+
+            try
+            {
+                con = new SqlConnection(connectionString);
+                cmd = new SqlCommand("talepEtKaydet", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cmd.Parameters.AddWithValue("@StartDate",StartDate);
+                cmd.Parameters.AddWithValue("@EndDate", EndDate);
+                cmd.Parameters.AddWithValue("@Km", Km);
+                cmd.Parameters.AddWithValue("@fkCar", fkCar);
+                cmd.Parameters.AddWithValue("@uniqueID", uniqueID);
+                ret = new DataTable("GenericTable");
+                adp = new SqlDataAdapter(cmd);
+
+                adp.Fill(ret);
+
+            }
+            catch(Exception ex)
+            {
+
+            }
+            return ret;
+        }
+
+
+
+        internal static DataTable talepEtAraba(int carID)
+        {
+            SqlConnection con = null;
+            SqlCommand cmd = null;
+            SqlDataAdapter adp = null;
+            DataTable ret = null;
+
+            try
+            {
+                con = new SqlConnection(connectionString);
+                cmd = new SqlCommand("talepEtAraba", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@carID", carID);
+
+                ret = new DataTable("GenericTable");
+                adp = new SqlDataAdapter(cmd);
+
+                adp.Fill(ret);
+
+            }
+            catch (Exception ex)
+            {
+                                            //  MessageBox.Show("hob");
+            }
+            return ret;
+        }
+
 
 
         //Eklenecek arabanın bilgilerini veritabanına giren fonksiyon
@@ -173,6 +256,8 @@ namespace CarRequest
                 cmd.Parameters.AddWithValue("@plaka", plaka);
                 cmd.Parameters.AddWithValue("@lastkm", lastKm);
                 cmd.Parameters.AddWithValue("@available", available);
+
+
 
                 if (con.State != System.Data.ConnectionState.Open)
                 {

@@ -84,7 +84,7 @@ namespace CarRequest
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-
+            
             SqlConnection baglanti = new SqlConnection(connectionString);
             baglanti.Open();
             string güncelleme = "UPDATE tblRent    SET  fkIncidents=@fkIncident  WHERE ID=@rentID";
