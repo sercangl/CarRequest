@@ -19,12 +19,8 @@ namespace CarRequest
         {
             throw new NotImplementedException();
         }
-
-
-
-
-
-
+            
+        
 
 
         //Kişileri veri tabanına ekleyen fonksiyon
