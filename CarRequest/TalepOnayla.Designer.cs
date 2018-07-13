@@ -68,9 +68,9 @@
             // 
             // OnayButton
             // 
-            this.OnayButton.Location = new System.Drawing.Point(216, 377);
+            this.OnayButton.Location = new System.Drawing.Point(214, 377);
             this.OnayButton.Name = "OnayButton";
-            this.OnayButton.Size = new System.Drawing.Size(250, 54);
+            this.OnayButton.Size = new System.Drawing.Size(251, 54);
             this.OnayButton.TabIndex = 3;
             this.OnayButton.Text = "Talep ONAYLA";
             this.OnayButton.UseVisualStyleBackColor = true;
@@ -98,9 +98,9 @@
             // textBox1
             // 
             this.textBox1.Enabled = false;
-            this.textBox1.Location = new System.Drawing.Point(215, 301);
+            this.textBox1.Location = new System.Drawing.Point(214, 301);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(251, 20);
+            this.textBox1.Size = new System.Drawing.Size(252, 20);
             this.textBox1.TabIndex = 11;
             this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
@@ -116,7 +116,7 @@
             // 
             // kiloMetre
             // 
-            this.kiloMetre.Location = new System.Drawing.Point(215, 341);
+            this.kiloMetre.Location = new System.Drawing.Point(214, 341);
             this.kiloMetre.Name = "kiloMetre";
             this.kiloMetre.Size = new System.Drawing.Size(251, 20);
             this.kiloMetre.TabIndex = 13;
