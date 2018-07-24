@@ -128,7 +128,7 @@ namespace CarRequest
         }
 
 
-        // WROTE BOSS
+        // BOSS WROTE THİS PART.
 
         internal static DataTable talepEtArama(int personID)
         {
@@ -158,17 +158,8 @@ namespace CarRequest
         }
         
 
-        /*
-         * 
-         * 
-         *          komut.Parameters.AddWithValue("@StartDate", Convert.ToDateTime(dateTimePicker1.Text));
-                    komut.Parameters.AddWithValue("@EndDate", Convert.ToDateTime(dateTimePicker2.Text));
-                    komut.Parameters.AddWithValue("@Km", int.Parse(kiloMetre.Text));
-                    komut.Parameters.AddWithValue("@fkCar", int.Parse(textBox1.Text));
-                    komut.Parameters.AddWithValue("@uniqueID", int.Parse(textBox5.Text));
-         * 
-         * 
-         * */
+
+
 
         internal static DataTable talepEtKaydet(DateTime StartDate,DateTime EndDate,int Km, int fkCar,int uniqueID)
         {
@@ -200,6 +191,8 @@ namespace CarRequest
             }
             return ret;
         }
+
+
 
 
 
@@ -292,6 +285,17 @@ namespace CarRequest
 
         }
         
+
+
+
+        // Talep etme formundaki comboBox'a gelen arabaları listeliyor.
+  
+
+
+
+
+
+
 
       // Talep edilen aracın bilgilerini veritabanına giren fonksiyon
         public static void AddRentt(int fkPerson,DateTime StartDate,DateTime EndDate)

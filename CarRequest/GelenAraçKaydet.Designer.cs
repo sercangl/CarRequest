@@ -76,7 +76,7 @@
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(227, 40);
             this.btnSave.TabIndex = 27;
-            this.btnSave.Text = "FORMU KAYDET";
+            this.btnSave.Text = "FORMU KAYDET     (_3_)";
             this.btnSave.UseVisualStyleBackColor = true;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
@@ -151,7 +151,7 @@
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(108, 19);
             this.button1.TabIndex = 33;
-            this.button1.Text = "Ara";
+            this.button1.Text = "Ara      (_1_)";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
@@ -189,7 +189,7 @@
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(192, 37);
             this.button3.TabIndex = 38;
-            this.button3.Text = "TUTANAĞI KAYDET";
+            this.button3.Text = "TUTANAĞI KAYDET      (_2_)";
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 

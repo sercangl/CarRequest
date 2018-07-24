@@ -77,14 +77,14 @@ namespace CarRequest
         {
             DataTable dt = DBActions.talepEtArama(int.Parse(textBox2.Text));
 
-            
+
             dateTimePicker1.Text = dt.Rows[0]["StartDate"].ToString();
             dateTimePicker2.Text = dt.Rows[0]["EndDate"].ToString();
             textBox5.Text = dt.Rows[0]["ID"].ToString();
 
         }
 
-
+        // talep etme formunda kullanılan kaydetmeye yarayan fonksiyon
         public void  talepEtKaydet()
         {
            DBActions.talepEtKaydet(Convert.ToDateTime(dateTimePicker1.Text),Convert.ToDateTime(dateTimePicker2.Text),int.Parse(kiloMetre.Text),int.Parse(textBox1.Text),int.Parse(textBox5.Text));
@@ -98,6 +98,8 @@ namespace CarRequest
 
 
         }
+
+        // talep etme kısmında araba vermeyi sağlayan fonksiyon
 
         public void talepEtAraba()
         {
@@ -117,6 +119,8 @@ namespace CarRequest
             talepEtArama();
         }
 
+
+
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
@@ -135,6 +139,13 @@ namespace CarRequest
                 }
             }
 
+
+        }
+
+
+
+        public void talepEtArabaListele()
+        {
 
         }
 
@@ -181,13 +192,7 @@ namespace CarRequest
                 MessageBox.Show("TALEBİ ONAYLADINIZ ..!");
                 this.Refresh();
             
-         
-
-            // kişilere atanan arabaların müsaitlik durumunu düşürüyor
-
-            // kişilere atanan arabaların müsaitlik durumunu düşürüyor
-
-            
+          
         }
        
         
