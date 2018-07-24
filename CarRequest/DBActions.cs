@@ -128,6 +128,7 @@ namespace CarRequest
         }
 
 
+        // WROTE BOSS
 
         internal static DataTable talepEtArama(int personID)
         {
@@ -224,7 +225,7 @@ namespace CarRequest
             }
             catch (Exception ex)
             {
-                                            //  MessageBox.Show("hob");
+                  //  MessageBox.Show("hob");
             }
             return ret;
         }
